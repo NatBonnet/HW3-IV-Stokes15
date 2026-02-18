@@ -4,7 +4,7 @@ subtitle: "Replicating the IV strategy in Stokes (2015)"
 author: "Nathalie Bonnet"
 format:
   html:
-    theme: sketchy
+    theme: journal
     css: styles.css
 date: "February 17, 2026"
 ---
@@ -25,7 +25,7 @@ Keep your work readable: Use clear headings and label plot elements thoughtfully
 
 Submit both your rendered output and the Quarto (`.qmd`) file.
 
-**Assignment submission (YOUR NAME)**: ______________________________________
+**Assignment submission**: Nathalie Bonnet
 
 
 ------------------------------------------------------------------------
@@ -54,7 +54,6 @@ library(janitor)
 library(here)
 library(jtools)   # for export_summs (pretty regression tables)
 library(AER)      # for ivreg (2SLS estimation)
-
 ```
 
 ------------------------------------------------------------------------
@@ -93,7 +92,7 @@ b. Include the control variables used in Stokes (2015) for both stages: Distance
 c. After running the first stage, report the F-statistic for the instrument.
 
 ```{r}
-first_stage <- lm(proposed_turbine_3km~log_wind_power + mindistlake + latitude + longitude + + mindistlake_sq + long_sq + lat_sq + long_lat + district_id, data = matched_data)
+first_stage <- lm(proposed_turbine_3km~log_wind_power + mindistlake + latitude + longitude + mindistlake_sq + long_sq + lat_sq + long_lat + district_id, data = matched_data)
 
 export_summs(first_stage, digits = 3,
              model.names = c("First stage: Propoposed Turbine 3km"),
@@ -170,9 +169,9 @@ export_summs(second_stage, digits = 3,
 **Question 3:** List the four key assumptions required for the IV strategy (2SLS) to identify a causal effect, and briefly explain what each one means in the context of this study. (Hint: think about what conditions a valid instrument must satisfy (relevance, exclusion,...)
 
 *Response:* 
-Relevance: Wind power must strongly predict turbine placement, so in this context high wind areas must be significantly more likely to have proposed turbines. 
+1. Relevance: Wind power must strongly predict turbine placement, so in this context high wind areas must be significantly more likely to have proposed turbines. 
 
-Exclusion Restriction: Wind speed itself doesn't influence voting. 
+2. Exclusion Restriction: Wind speed itself doesn't influence voting. 
 
 3. Independence/Exogeneity: Wind power is uncorrelated with unobserved confounders.
 
